@@ -1,0 +1,5 @@
+Porta MySQL = 3306
+Windows Service Name = MySQL80
+
+MySQL Installer 8.0.35
+MySQL Workbench 8.0.34

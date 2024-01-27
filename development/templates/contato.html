@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}Contato{% endblock %}
+
+{% block imagemfundo %} 
+    class="imgfundo"
+{% endblock %}
+
+{% block content %} 
+    <main>
+
+        <figure>
+            <img id="imagem-contato-1" src="../static/img/contato-img1.png" alt="contato-img1">
+        </figure>
+
+        <article>
+            <h1>
+                <img class="icone-roxo" src="../static/img/icons/paw-solid-1.svg" alt="paw-solid-1"/>
+                Entre em contato:
+            </h1>
+            <p>Se você se apaixonou por um dos nossos adoráveis membros peludos e está ansioso para organizar um encontro animado, estamos aqui para facilitar! Utilize a nossa página de contato para se conectar com outros tutores de pets, trocar experiências e, é claro, marcar aquele encontro especial para os seus cãezinhos.
+            </p>
+            <hr>
+        </article>
+
+        <form method="POST" action="/contato.html">
+            <div>
+                <label for="fnome">Nome:</label>
+                <input class="form-control" type="text"  id="fnome" name="nome" placeholder="Nome" required>
+            </div>            
+            <div>
+                <label for="fapelido">Apelido:</label>
+                <input class="form-control" type="text"  id="fapelido" name="apelido" placeholder="Apelido" required>
+            </div>    
+            <div class="form-group">
+              <label for="femail">Seu e-mail:</label>
+              <input type="email" id="femail" name="email" class="form-control" placeholder="nome@exemplo.com" required>
+            </div>
+            <div class="form-group">
+              <label for="fcrush">Pet de interesse:</label>
+              <select class="form-control" id="fcrush" name="crush" required>
+                <option>Spike Lee</option>
+                <option>Luke Skywalker</option>
+                <option>Simba King</option>
+                <option>Robin Williams</option>
+                <option>Aurora Boreal</option>
+                <option>Katy Perry</option>
+                <option>Bebel Carrara</option>
+                <option>Lady Gaga</option>
+              </select>
+            </div>
+            <div>
+                <label for="fassunto">Assunto:</label>
+                <input class="form-control" type="text" id="fassunto" name="assunto" placeholder="Assunto" required>
+            </div>
+            <div class="form-group">
+              <label for="fmensagem">Mensagem:</label>
+              <textarea class="form-control" id="fmensagem" name="mensagem" rows="3"  required></textarea>
+            </div>
+
+            <div class="footer-form">
+
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="btnradio1">Enviar e-mail privado</label>
+                
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btnradio2">Enviar recado público</label>
+
+                </div>
+
+                <div class="col-auto">
+                    <button id="botaoformulario" type="submit" class="btn btn-primary mb-2" onclick="showMsg()">Enviar</button>
+                </div>
+
+            </div>
+
+        </form>
+
+        <script>
+            function showMsg() {
+                var campos = [];
+                campos.push(document.getElementById("fnome").value);
+                campos.push(document.getElementById("fapelido").value);
+                campos.push(document.getElementById("femail").value);
+                campos.push(document.getElementById("fcrush").value);
+                campos.push(document.getElementById("fassunto").value);
+                campos.push(document.getElementById("fmensagem").value);
+                
+                validados = 0;
+                for (var i = 0; i < campos.length; i++) {
+                    if (campos[i] != '') {
+                        validados++;
+                    } 
+                }
+                if (validados == campos.length){
+                    alert("Obrigado por enviar sua mensagem!");
+                }
+            }
+        </script>
+
+    </main>
+{% endblock %}

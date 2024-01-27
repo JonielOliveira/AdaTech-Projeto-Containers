@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Recados{% endblock %}
+
+{% block imagemfundo %} 
+  class="imgfundo"
+{% endblock %}
+
+{% block content %} 
+  <main>
+
+    <div class="flex-container-male">
+        
+      {% for msg in detalhes_mensagens %}
+        
+          <div class="accordion" id={{msg[0]}}>  
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={{msg[1]}} aria-expanded="true" aria-controls={{msg[2]}} style="color: #8457ff; font-weight: bold;">
+                  <p><b>Mensagem para: </b>{{msg[7]}}</p>
+                </button>
+              </h2>
+              <div id={{msg[2]}} class="accordion-collapse collapse" data-bs-parent={{msg[3]}}>
+                <div class="accordion-body">
+                    <p><b>De: </b>{{msg[5]}}</p>
+                    <p><b>Crush: </b>{{msg[7]}}</p>
+                    <p><b>Assunto: </b>{{msg[8]}}</p>
+                    <p><b>Mensagem: </b>{{msg[9]}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      {% endfor %}
+
+    </div>
+    
+  </main>
+{% endblock %}
+

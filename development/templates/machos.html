@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Encontre: Machos{% endblock %}
+
+{% block imagemfundo %} 
+  class="imgfundo"
+{% endblock %}
+
+{% block content %} 
+  <main>        
+    <div class="flex-container">
+
+      <div class="card" style="width: 18rem;">
+          <img src="../static/img/spike/spike-img1.png" class="card-img-top" alt="image-Spike">
+          <div class="card-body">
+            <h5 class="card-title" style="color: #8457ff; font-weight: bold;">Spike</h5>
+            <p class="card-text">Olá, eu sou o Spike! Gosto muito de comer ração Golden, mas no café da manhã adoro um pãozinho.</p>
+            <a href="{{url_for('spike')}}" class="btn btn-primary">Tenho Interesse</a>
+          </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+          <img src="../static/img/luke/luke-img1.png" class="card-img-top" alt="image-Luke">
+          <div class="card-body">
+            <h5 class="card-title" style="color: #8457ff; font-weight: bold;">Luke</h5>
+            <p class="card-text">Oi, sou o Luke, um labrador animado de 3 anos! Amo correr no parque, brincar de pegar a bolinha e, é claro, dar muitos lambeijos.</p>
+            <a href="{{url_for('luke')}}" class="btn btn-primary">Tenho Interesse</a>
+          </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+          <img src="../static/img/simba/simba-img1.png" class="card-img-top" alt="image-Simba">
+          <div class="card-body">
+            <h5 class="card-title" style="color: #8457ff; font-weight: bold;">Simba</h5>
+            <p class="card-text">Olá, sou o Simba, um Pastor Alemão de 5 anos cheio de energia e personalidade. Amo explorar novos lugares, especialmente trilhas na natureza.</p>
+            <a href="{{url_for('simba')}}" class="btn btn-primary">Tenho Interesse</a>
+          </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+          <img src="../static/img/robin/robin-img1.png" class="card-img-top" alt="image-Robin">
+          <div class="card-body">
+            <h5 class="card-title" style="color: #8457ff; font-weight: bold;">Robin</h5>
+            <p class="card-text">Olá, sou o Robin, um Doberman de 4 anos cheio de elegância e energia. Adoro exercícios, seja correndo no parque ou brincando de pegar a bolinha.</p>
+            <a href="{{url_for('robin')}}" class="btn btn-primary">Tenho Interesse</a>
+          </div>
+      </div>
+
+    </div>
+  </main>
+{% endblock %}
+

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Encontre: Fêmeas{% endblock %}
+
+{% block imagemfundo %} 
+  class="imgfundo"
+{% endblock %}
+
+{% block content %} 
+  <main>        
+    <div class="flex-container">
+
+      <div class="card" style="width: 18rem;">
+          <img src="../static/img/aurora/aurora-img1.png" class="card-img-top" alt="image-Aurora">
+          <div class="card-body">
+            <h5 class="card-title" style="color: #8457ff; font-weight: bold;">Aurora</h5>
+            <p class="card-text">Olá, sou a Aurora, uma Beagle cheia de alegria com 2 anos de idade! Adoro farejar tudo ao meu redor, especialmente durante nossos passeios.</p>
+            <a href="{{url_for('aurora')}}" class="btn btn-primary">Tenho Interesse</a>
+          </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+          <img src="../static/img/katy/katy-img1.png" class="card-img-top" alt="image-Katy">
+          <div class="card-body">
+            <h5 class="card-title" style="color: #8457ff; font-weight: bold;">Katy</h5>
+            <p class="card-text">Olá, sou a Katy, uma Cocker Spaniel cheia de charme com 4 anos de idade! Tenho uma personalidade doce e adoro receber carinho.</p>
+            <a href="{{url_for('katy')}}" class="btn btn-primary">Tenho Interesse</a>
+          </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+          <img src="../static/img/bebel/bebel-img1.png" class="card-img-top" alt="image-Bebel">
+          <div class="card-body">
+            <h5 class="card-title" style="color: #8457ff; font-weight: bold;">Bebel</h5>
+            <p class="card-text"> Olá, sou a Bebel, uma Akita Inu cheia de graça com 3 anos de idade! Tenho um temperamento gentil e sou leal aos meus amigos.</p>
+            <a href="{{url_for('bebel')}}" class="btn btn-primary">Tenho Interesse</a>
+          </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+          <img src="../static/img/lady/lady-img1.png" class="card-img-top" alt="image-Lady">
+          <div class="card-body">
+            <h5 class="card-title" style="color: #8457ff; font-weight: bold;">Lady</h5>
+            <p class="card-text">Olá, sou a Lady, uma Husky Siberiano cheia de energia com 5 anos de idade! Tenho olhos expressivos e uma personalidade cativante.</p>
+            <a href="{{url_for('lady')}}" class="btn btn-primary">Tenho Interesse</a>
+          </div>
+      </div>
+
+    </div>
+  </main>
+{% endblock %}
+
