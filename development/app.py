@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import pymysql
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
 # conexão com o banco de dados
 app.config['MYSQL_HOST'] = '127.0.0.1' # 127.0.0.1 (localhost)
@@ -104,6 +104,58 @@ def bebel():
 @app.route('/lady.html')
 def lady():
     return render_template('usuario-08-lady.html')
+
+
+
+def criar_tabela(mysql_connection):
+    # Conecta ao banco de dados
+    connection = mysql_connection
+
+    try:
+        with connection.cursor() as cursor:
+            # Verifica se a tabela já existe
+            table_name = 'recados'
+            query = f"SHOW TABLES LIKE '{table_name}'"
+            cursor.execute(query)
+
+            if cursor.fetchone() is None:
+                # Cria a tabela
+                create_table_query = """
+                    CREATE TABLE recados (
+	                    nome VARCHAR(45),
+                        apelido VARCHAR(45),
+	                    email VARCHAR(45),
+                        crush VARCHAR(45),
+                        assunto VARCHAR(45),
+                        mensagem VARCHAR(255)
+                    )
+                """
+                cursor.execute(create_table_query)
+
+        # Commit das alterações
+        connection.commit()
+
+    finally:
+        # Fecha a conexão
+        connection.close()
+
+
+
+# Função para criar e configurar a aplicação Flask
+def create_app():
+    app = Flask(__name__)
+
+    # Configurações e extensões adicionais podem ser adicionadas aqui
+
+    # Cria a tabela no início da aplicação
+    criar_tabela()
+
+    # Adicione outras rotas e lógica da aplicação aqui
+
+    return app
+
+# Inicializa a aplicação
+app = create_app()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)

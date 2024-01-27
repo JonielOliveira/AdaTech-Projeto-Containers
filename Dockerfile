@@ -9,7 +9,7 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 # Copie o código da aplicação
-COPY /development /app
+COPY app app
 
 # Defina as variáveis de ambiente
 ENV FLASK_APP=app/app.py
