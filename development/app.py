@@ -3,6 +3,73 @@ import pymysql
 
 # app = Flask(__name__)
 
+def criar_tabela(mysql_connection):
+    # Conecta ao banco de dados
+    connection = mysql_connection
+
+    try:
+        with connection.cursor() as cursor:
+            # Verifica se a tabela já existe
+            table_name = 'recados'
+            query = f"SHOW TABLES LIKE '{table_name}'"
+            cursor.execute(query)
+
+            if cursor.fetchone() is None:
+                # Cria a tabela
+                create_table_query = """
+                    CREATE TABLE recados (
+	                    nome VARCHAR(45),
+                        apelido VARCHAR(45),
+	                    email VARCHAR(45),
+                        crush VARCHAR(45),
+                        assunto VARCHAR(45),
+                        mensagem VARCHAR(255)
+                    )
+                """
+                cursor.execute(create_table_query)
+
+        # Commit das alterações
+        connection.commit()
+
+    finally:
+        # Fecha a conexão
+        connection.close()
+
+
+
+# Função para criar e configurar a aplicação Flask
+def create_app():
+    app = Flask(__name__)
+
+    # conexão com o banco de dados
+    app.config['MYSQL_HOST'] = '127.0.0.1' # 127.0.0.1 (localhost)
+    app.config['MYSQL_USER'] = 'root'
+    app.config['MYSQL_PASSWORD'] = 'a1b2c3d4'
+    app.config['MYSQL_DB'] = 'contatos'
+
+    global mysql_connection
+
+    mysql_connection = pymysql.connect(
+        host = app.config['MYSQL_HOST'],
+        user = app.config['MYSQL_USER'],
+        password= app.config['MYSQL_PASSWORD'],
+        db = app.config['MYSQL_DB']
+    )
+
+    # Configurações e extensões adicionais podem ser adicionadas aqui
+
+    # Cria a tabela no início da aplicação
+    criar_tabela(mysql_connection)
+
+    # Adicione outras rotas e lógica da aplicação aqui
+
+    return app
+
+# Inicializa a aplicação
+app = create_app()
+
+
+
 @app.route('/contato.html', methods=['GET', 'POST'])  
 def contato():
 
@@ -91,73 +158,6 @@ def bebel():
 @app.route('/lady.html')
 def lady():
     return render_template('usuario-08-lady.html')
-
-
-
-def criar_tabela(mysql_connection):
-    # Conecta ao banco de dados
-    connection = mysql_connection
-
-    try:
-        with connection.cursor() as cursor:
-            # Verifica se a tabela já existe
-            table_name = 'recados'
-            query = f"SHOW TABLES LIKE '{table_name}'"
-            cursor.execute(query)
-
-            if cursor.fetchone() is None:
-                # Cria a tabela
-                create_table_query = """
-                    CREATE TABLE recados (
-	                    nome VARCHAR(45),
-                        apelido VARCHAR(45),
-	                    email VARCHAR(45),
-                        crush VARCHAR(45),
-                        assunto VARCHAR(45),
-                        mensagem VARCHAR(255)
-                    )
-                """
-                cursor.execute(create_table_query)
-
-        # Commit das alterações
-        connection.commit()
-
-    finally:
-        # Fecha a conexão
-        connection.close()
-
-
-
-# Função para criar e configurar a aplicação Flask
-def create_app():
-    app = Flask(__name__)
-
-    # conexão com o banco de dados
-    app.config['MYSQL_HOST'] = '127.0.0.1' # 127.0.0.1 (localhost)
-    app.config['MYSQL_USER'] = 'root'
-    app.config['MYSQL_PASSWORD'] = 'a1b2c3d4'
-    app.config['MYSQL_DB'] = 'contatos'
-
-    mysql_connection = pymysql.connect(
-        host = app.config['MYSQL_HOST'],
-        user = app.config['MYSQL_USER'],
-        password= app.config['MYSQL_PASSWORD'],
-        db = app.config['MYSQL_DB']
-    )
-
-    # Configurações e extensões adicionais podem ser adicionadas aqui
-
-    # Cria a tabela no início da aplicação
-    criar_tabela(mysql_connection)
-
-    # Adicione outras rotas e lógica da aplicação aqui
-
-    return app
-
-# Inicializa a aplicação
-app = create_app()
-
-
 
 
 
