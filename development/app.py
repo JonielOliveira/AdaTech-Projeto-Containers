@@ -3,19 +3,6 @@ import pymysql
 
 # app = Flask(__name__)
 
-# conexão com o banco de dados
-app.config['MYSQL_HOST'] = '127.0.0.1' # 127.0.0.1 (localhost)
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'a1b2c3d4'
-app.config['MYSQL_DB'] = 'contatos'
-
-mysql_connection = pymysql.connect(
-    host = app.config['MYSQL_HOST'],
-    user = app.config['MYSQL_USER'],
-    password= app.config['MYSQL_PASSWORD'],
-    db = app.config['MYSQL_DB']
-)
-
 @app.route('/contato.html', methods=['GET', 'POST'])  
 def contato():
 
@@ -145,10 +132,23 @@ def criar_tabela(mysql_connection):
 def create_app():
     app = Flask(__name__)
 
+    # conexão com o banco de dados
+    app.config['MYSQL_HOST'] = '127.0.0.1' # 127.0.0.1 (localhost)
+    app.config['MYSQL_USER'] = 'root'
+    app.config['MYSQL_PASSWORD'] = 'a1b2c3d4'
+    app.config['MYSQL_DB'] = 'contatos'
+
+    mysql_connection = pymysql.connect(
+        host = app.config['MYSQL_HOST'],
+        user = app.config['MYSQL_USER'],
+        password= app.config['MYSQL_PASSWORD'],
+        db = app.config['MYSQL_DB']
+    )
+
     # Configurações e extensões adicionais podem ser adicionadas aqui
 
     # Cria a tabela no início da aplicação
-    criar_tabela()
+    criar_tabela(mysql_connection)
 
     # Adicione outras rotas e lógica da aplicação aqui
 
@@ -156,6 +156,10 @@ def create_app():
 
 # Inicializa a aplicação
 app = create_app()
+
+
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
