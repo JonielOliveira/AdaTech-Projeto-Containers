@@ -14,7 +14,10 @@ def criar_tabela(mysql_connection):
             query = f"SHOW TABLES LIKE '{table_name}'"
             cursor.execute(query)
 
-            if cursor.fetchone() is None:
+            existetabela = cursor.fetchone()
+
+            if existetabela is None:
+                
                 # Cria a tabela
                 create_table_query = """
                     CREATE TABLE recados (
@@ -24,7 +27,16 @@ def criar_tabela(mysql_connection):
                         crush VARCHAR(45),
                         assunto VARCHAR(45),
                         mensagem VARCHAR(255)
-                    )
+                    );
+                """
+                cursor.execute(create_table_query)
+
+                create_table_query = """
+                INSERT INTO recados (nome, apelido, email, crush, assunto, mensagem)
+                VALUES
+                ('Anakin Skywalker', 'Darth Vader', 'darth.vader@gmail.com', 'Luke Skywalker', 'Um segredo para você', 'Luke, eu sou seu pai!'),
+                ('Rafiki Mandril', 'Rafiki Babuíno', 'rafiki.babuino@outlook.com', 'Simba King', 'O passado', 'O passado pode machucar. Mas, como eu vejo é: você pode fugir dele ou aprender com ele.'),
+                ('Agostinho Carrara', 'Tinho', 'agostinho.carrara@uol.com.br','Bebel Carrara', 'Sai logo desse site!', 'Eu amo você, Maria Isabel. Mas, você é difícil. Eu amo você do tamanho da dificuldade que você é.');
                 """
                 cursor.execute(create_table_query)
 
@@ -81,13 +93,21 @@ def contato():
         assunto = request.form['assunto']
         mensagem = request.form['mensagem']
 
-        cur = mysql_connection.cursor()
+
+        mysql_connection3 = pymysql.connect(
+            host = app.config['MYSQL_HOST'],
+            user = app.config['MYSQL_USER'],
+            password= app.config['MYSQL_PASSWORD'],
+            db = app.config['MYSQL_DB']
+        )
+
+        cur = mysql_connection3.cursor()
 
         cur.execute("INSERT INTO recados(nome, apelido, email, crush, assunto, mensagem) VALUES (%s, %s, %s, %s, %s, %s)", (nome, apelido, email, crush, assunto, mensagem))
 
-        mysql_connection.commit()
+        mysql_connection3.commit()
 
-        cur.close()
+        mysql_connection3.close()
 
         return redirect(url_for('index'))
     
@@ -95,13 +115,21 @@ def contato():
 
 @app.route('/recados.html')  
 def recados():
-    cur = mysql_connection.cursor()
+    
+    mysql_connection2 = pymysql.connect(
+        host = app.config['MYSQL_HOST'],
+        user = app.config['MYSQL_USER'],
+        password= app.config['MYSQL_PASSWORD'],
+        db = app.config['MYSQL_DB']
+    )
+    
+    cur = mysql_connection2.cursor()
 
     mensagens = cur.execute("SELECT * FROM recados")
 
     if mensagens > 0:
         dados_mensagens = cur.fetchall()
-        cur.close()
+        mysql_connection2.close()
 
         i = 0
         detalhes_mensagens = []
@@ -112,7 +140,7 @@ def recados():
 
         return render_template('recados.html', detalhes_mensagens=detalhes_mensagens)
     else:
-        cur.close()
+        mysql_connection2.close()
     
 
 @app.route('/')
