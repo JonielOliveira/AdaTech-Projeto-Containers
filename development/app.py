@@ -54,7 +54,7 @@ def create_app():
     app = Flask(__name__)
 
     # conexão com o banco de dados
-    app.config['MYSQL_HOST'] = '127.0.0.1' # 127.0.0.1 (localhost)
+    app.config['MYSQL_HOST'] = 'database' # 127.0.0.1 (localhost)
     app.config['MYSQL_USER'] = 'root'
     app.config['MYSQL_PASSWORD'] = 'a1b2c3d4'
     app.config['MYSQL_DATABASE'] = 'contatos'
@@ -72,6 +72,8 @@ def create_app():
 
     # Cria a tabela no início da aplicação
     criar_tabela(mysql_connection)
+
+    print("Está funcionando!!!")
 
     # Adicione outras rotas e lógica da aplicação aqui
 
