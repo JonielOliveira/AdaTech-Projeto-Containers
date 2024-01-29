@@ -2,17 +2,17 @@
 FROM python:3.10
 
 # Defina o diretório de trabalho
-WORKDIR /app
+WORKDIR /development
 
 # Copie o arquivo de requisitos e instale as dependências
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 # Copie o código da aplicação
-COPY app app
+COPY . .
 
 # Defina as variáveis de ambiente
-ENV FLASK_APP=app/app.py
+ENV FLASK_APP=development/app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
 # Exponha a porta em que o Flask irá rodar

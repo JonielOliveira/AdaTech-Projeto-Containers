@@ -57,7 +57,7 @@ def create_app():
     app.config['MYSQL_HOST'] = '127.0.0.1' # 127.0.0.1 (localhost)
     app.config['MYSQL_USER'] = 'root'
     app.config['MYSQL_PASSWORD'] = 'a1b2c3d4'
-    app.config['MYSQL_DB'] = 'contatos'
+    app.config['MYSQL_DATABASE'] = 'contatos'
 
     global mysql_connection
 
@@ -65,7 +65,7 @@ def create_app():
         host = app.config['MYSQL_HOST'],
         user = app.config['MYSQL_USER'],
         password= app.config['MYSQL_PASSWORD'],
-        db = app.config['MYSQL_DB']
+        db = app.config['MYSQL_DATABASE']
     )
 
     # Configurações e extensões adicionais podem ser adicionadas aqui
@@ -98,7 +98,7 @@ def contato():
             host = app.config['MYSQL_HOST'],
             user = app.config['MYSQL_USER'],
             password= app.config['MYSQL_PASSWORD'],
-            db = app.config['MYSQL_DB']
+            db = app.config['MYSQL_DATABASE']
         )
 
         cur = mysql_connection3.cursor()
@@ -120,7 +120,7 @@ def recados():
         host = app.config['MYSQL_HOST'],
         user = app.config['MYSQL_USER'],
         password= app.config['MYSQL_PASSWORD'],
-        db = app.config['MYSQL_DB']
+        db = app.config['MYSQL_DATABASE']
     )
     
     cur = mysql_connection2.cursor()

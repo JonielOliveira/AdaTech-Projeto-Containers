@@ -2,10 +2,10 @@
 Description=Minha Aplicação Flask
 
 [Service]
-ExecStart=/home/ubuntu/AdaTech-Projeto-Containers/development/script/iniciar_flask_app.sh
+ExecStart=$HOME/AdaTech-Projeto-Containers/development/script/iniciar_flask_app.sh
 Restart=always
 User=root
-WorkingDirectory=/home/ubuntu/AdaTech-Projeto-Containers/development
+WorkingDirectory=$HOME/AdaTech-Projeto-Containers/development
 
 [Install]
 WantedBy=multi-user.target
