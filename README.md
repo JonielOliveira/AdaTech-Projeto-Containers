@@ -16,4 +16,7 @@
 
 ## Descrição
 
-Adicionar descrição posteriormente.
+Requisitos do projeto:
+
+![Enunciado_Projeto](https://github.com/JonielOliveira/AdaTech-Projeto-Containers/assets/143021491/6f4023af-47ce-4343-979d-dee43a7b0096)
+
